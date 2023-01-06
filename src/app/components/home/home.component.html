@@ -1,0 +1,65 @@
+<div class="container">
+	<header>
+		<h2>Bienvenidos al buscador de  perfiles en GitHub</h2>
+	</header>
+
+	<div>
+	  <div >
+		<form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="buscador">
+			<mat-form-field>
+			  <input type="text" matInput formControlName="userName" placeholder="Introduce el usuario">
+			</mat-form-field>
+			<button mat-raised-button color="primary" type="submit">Buscar</button>    
+		  </form>
+	  </div>
+
+	  <div *ngIf="user">
+		<a href="{{user.html_url}}">
+			<img [src]="user.avatar_url+'&s=150'" [alt]="user.name" style="border-radius: 50%;"> <p> {{user.bio}}</p>
+		</a>
+	  </div>
+	  
+ 		<div class="table">
+			<h3 class="panel-title">Lista de Repositorios</h3>
+			<mat-form-field>
+				<mat-label>Buscar</mat-label>
+				<input matInput (keyup)="filterRepo($event)" placeholder="buscar">
+			  </mat-form-field>
+				<table mat-table class="mat-elevation-z8" [dataSource]="this.repos" matSort (matSortChange)="announceSortChange($event)">
+					<ng-container matColumnDef="Nombre de repositorio">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by nameRepo"> Nombre del repo </th>
+						<td mat-cell *matCellDef="let repos"> {{repos.name}} </td>
+					  </ng-container>
+
+					  <ng-container matColumnDef="Descripcion">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description"> Descripcion </th>
+						<td mat-cell *matCellDef="let repos"> {{repos.description}} </td>
+					  </ng-container>
+
+					  <ng-container matColumnDef="Enlace al repo">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by urlRepo"> Enlace al repo </th>
+						<td mat-cell *matCellDef="let repos"> {{repos.html_url}} </td>
+					  </ng-container>
+
+					  <ng-container matColumnDef="Estrellas">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by stargazersCount"> Estrellas </th>
+						<td mat-cell *matCellDef="let repos"> {{repos.stargazers_count}} </td>
+					  </ng-container>
+
+					  <ng-container matColumnDef="Lenguajes de programación">
+						<th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by languageRepo"> Lenguajes del repo </th>
+						<td mat-cell *matCellDef="let repos"> {{repos.language}} </td>
+					  </ng-container>
+					<tr mat-header-row *matHeaderRowDef="columnas"></tr>
+  					<tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+				</table>
+				<mat-paginator [pageSizeOptions]="[1, 5, 10, 20, 30]"
+							showFirstLastButtons
+							aria-label="Select number of elements">
+  				</mat-paginator>
+		</div>
+	</div>
+</div>
+
+
+

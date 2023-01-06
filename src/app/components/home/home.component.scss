@@ -1,0 +1,35 @@
+h2, h3 {
+	font-size: 40px;
+	text-transform: uppercase;
+	font-family: 'Times New Roman', Times, serif;
+	letter-spacing: -1px;
+	transition: 700ms ease;
+	font-variation-settings: "wght" 311;
+	margin-bottom: 0.8rem;
+	color: rgb(121, 165, 216);
+	outline: none;
+	margin-left: 18%;
+  }
+  
+  h2:hover, h3:hover {
+	font-variation-settings: "wght" 582; 
+	letter-spacing: 1px;
+  }
+
+.avatar{
+    border-radius: 50%;
+}
+
+.panel-title{
+    margin-left: 27%;
+}
+
+table {
+    width: 90%;
+    margin:1rem auto;
+ }
+
+form{
+	margin-left: 35%;
+	margin-top: 3%;
+}
